@@ -1,0 +1,23 @@
+<div class="Note">
+    <div class="header">
+        <h1>Todo List </h1>
+        <input type="image" title="Add Task" (click)="addTask()" src="src/app/Images/add.png" />
+    </div>
+    <div id="newTask">
+        <input [(ngModel)]="task" (keyup.enter)="saveTask()" type="text">
+        <button (click)="saveTask()">Add</button>
+    </div>
+    <div id="tasksToShow">
+        <div id="content" *ngFor="let oneTask of tasks | slice:c*5:c*5+5 ;let i=index ">
+            <input type="checkbox" [(ngModel)]="oneTask.status" (click)="taskStatus(oneTask,$event)">
+            <span id="taskname" contenteditable="false" (keydown.enter)="contentEdit(oneTask,$event)" (dblclick)="contentEdit(oneTask,$event)" class="done-{{oneTask.status}}">
+            {{oneTask.taskName}}
+            </span>
+            <input id="delete" type="image" *ngIf="oneTask.status" (click)="deleteTask(oneTask)" src="src/app/Images/delete.png" />
+        </div>
+    </div>
+    <div id="arrows">
+        <button id="prev" disabled (click)="prev()"> &lt; </button>
+        <button id="next" disabled (click)="next()"> &gt;</button>
+    </div>
+</div>
